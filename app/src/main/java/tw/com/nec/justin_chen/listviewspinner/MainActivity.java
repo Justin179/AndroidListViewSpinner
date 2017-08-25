@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         String name;
     }
 
-    private Data[] makeSpinnerContent(){
+    private Data[] prepareSpinnerContent(){
         // 準備資料
         Data[] transData = new Data[4];
         for (int i = 0; i < transData.length; i++) {
@@ -34,13 +37,44 @@ public class MainActivity extends AppCompatActivity {
         return transData;
     }
 
+    private Data[] prepareGridViewContent(){
+        // 準備資料
+        Data[] cubeeData = new Data[10];
+        for (int i = 0; i < cubeeData.length; i++) {
+            cubeeData[i] = new Data();
+        }
+        cubeeData[0].name = "哭哭";
+        cubeeData[1].name = "發抖";
+        cubeeData[2].name = "再見";
+        cubeeData[3].name = "生氣";
+        cubeeData[4].name = "昏倒";
+        cubeeData[5].name = "竊笑";
+        cubeeData[6].name = "很棒";
+        cubeeData[7].name = "你好";
+        cubeeData[8].name = "驚嚇";
+        cubeeData[9].name = "大笑";
+        cubeeData[0].photo = R.drawable.cubee1;
+        cubeeData[1].photo = R.drawable.cubee2;
+        cubeeData[2].photo = R.drawable.cubee3;
+        cubeeData[3].photo = R.drawable.cubee4;
+        cubeeData[4].photo = R.drawable.cubee5;
+        cubeeData[5].photo = R.drawable.cubee6;
+        cubeeData[6].photo = R.drawable.cubee7;
+        cubeeData[7].photo = R.drawable.cubee8;
+        cubeeData[8].photo = R.drawable.cubee9;
+        cubeeData[9].photo = R.drawable.cubee10;
+        return cubeeData;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Spinner
+        // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
         // 做資料
-        Data[] transData = makeSpinnerContent();
+        Data[] transData = prepareSpinnerContent();
 
         // make Adapter (main)
         myAdapter transAdapter = new myAdapter(transData, R.layout.trans_list); // 左邊data 右邊template
@@ -51,6 +85,33 @@ public class MainActivity extends AppCompatActivity {
         // put Adapter into Spinner
         spinner.setAdapter(transAdapter);
 
+
+        // listView
+        // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        // 準備資料
+        String[] messageData = new String[]{"訊息1", "訊息2", "訊息3", "訊息4", "訊息5", "訊息6"};
+        // 準備Adapter
+        ArrayAdapter<String> messageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,messageData);
+        // 準備容器
+        ListView listView = (ListView) findViewById(R.id.listView);
+        // Adapter 放進容器
+        listView.setAdapter(messageAdapter);
+
+
+        // GridView
+        // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        // 準備資料
+        Data[] cubeeData = prepareGridViewContent();
+
+        // 準備Adapter
+        myAdapter cubeeAdapter = new myAdapter(cubeeData, R.layout.cubee_list); // 左資料 右模板
+
+        // 準備容器
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        gridView.setNumColumns(3);
+
+        // Adapter放到容器
+        gridView.setAdapter(cubeeAdapter);
 
     }
 

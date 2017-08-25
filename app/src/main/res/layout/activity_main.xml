@@ -15,16 +15,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner"/>
 
-    <!--
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/listView" />
+
     <GridView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/gridView" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/listView" />
-    -->
+
+
+
 
 </LinearLayout>
